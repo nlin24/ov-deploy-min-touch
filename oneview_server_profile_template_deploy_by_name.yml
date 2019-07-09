@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  vars:
+    config: "oneview_config.json"
+    spt_name: ""
+  tasks:
+    - name: Gather facts about all Server Profile Templates
+      oneview_server_profile_template_facts:
+        config: "{{ config }}"
+        name: "{{ spt_name }}"
+      delegate_to: localhost
+
+    - debug: var=server_profile_templates

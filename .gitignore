@@ -1,0 +1,10 @@
+project-env/
+__pycache__
+.pytest_cache
+*.json
+*.yaml
+*.txt
+!requirements.txt
+*.pyc
+!example.json
+*.retry
