@@ -1,0 +1,48 @@
+---
+- hosts: localhost
+  vars:
+    config: "oneview_config.json"
+    server_profile_template: "SPT-ESXi"
+    server_profile_name: "nathan-test-2"
+    os_deployment_plan: "ESXi-6.7_DP"
+    ip_address: "10.188.0.115"
+    dns1: "10.188.0.2"
+    dns2: "10.188.0.3"
+    gateway: "10.188.0.1"
+    netmask: "255.255.255.0"
+  tasks:
+#  - name: Add OS deployment plan to Server Profile Template
+#    oneview_server_profile_template:
+#      config: "{{ config }}"
+#      state: present
+  - name: Create Server Profile from Server Profile Template
+    oneview_server_profile:
+      config: "{{ config }}"
+      data:
+        name: "{{ server_profile_name }}"
+        serverProfileTemplateName: "{{ server_profile_template }}"        
+        osDeploymentSettings:
+          osCustomAttributes:
+           - name: "ManagementNIC.dhcp"
+             value: "false"
+           - name: "ManagementNIC.ipaddress"
+             value: "{{ ip_address }}"
+             type: "ipv4"
+           - name: "ManagementNIC.dns1"
+             value: "{{ dns1 }}"
+             type: "dns"
+           - name: "ManagementNIC.dns2"
+             value: "{{ dns2 }}"
+             type: "dns"
+           - name: "ManagementNIC.dhcp"
+             value: "false"
+           - name: "ManagementNIC.gateway"
+             value: "{{ gateway }}"
+             type: "gateway"
+           - name: "ManagementNIC.netmask"
+             value: "{{ netmask }}"
+             type: "subnetmask"
+      params:
+        force: True
+    delegate_to: localhost
+    register: result
