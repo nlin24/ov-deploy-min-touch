@@ -9,5 +9,7 @@
         config: "{{ config }}"
         name: "{{ spt_name }}"
       delegate_to: localhost
+      register: spt
 
-    - debug: var=server_profile_templates
+    - debug:
+        msg: '{{ spt }}' 
