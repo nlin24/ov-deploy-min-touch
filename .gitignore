@@ -1,4 +1,4 @@
-project-env/
+ov-ansible-p27/
 __pycache__
 .pytest_cache
 *.json
