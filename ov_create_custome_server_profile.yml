@@ -21,20 +21,7 @@
       config: "{{ config }}"
       data:
         name: "{{ server_profile_name }}"
-        serverProfileTemplateName: "{{ server_profile_template }}"
-        osCustomAttributes:
-          - name: "ManagementNIC.ipaddress"
-            value: "{{ ip_address }}"
-          - name: "ManagementNIC.dns1"
-            value: "{{ dns1 }}"
-          - name: "ManagementNIC.dns2"
-            value: "{{ dns2 }}"
-          - name: "ManagementNIC.dhcp"
-            value: "false"
-          - name: "ManagementNIC.gateway"
-            value: "{{ gateway }}"
-          - name: "ManagementNIC.netmask"
-            value: "{{ netmask }}"    
+        serverProfileTemplateName: "{{ server_profile_template }}"    
       params: # Supported only in API version >= 600
         force: True
     delegate_to: localhost
