@@ -8,4 +8,4 @@ __pycache__
 *.pyc
 !example.json
 *.retry
-test.yml
+test*.yml
