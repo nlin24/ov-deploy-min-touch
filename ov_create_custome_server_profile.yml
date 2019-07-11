@@ -4,24 +4,34 @@
   vars:
     config: "oneview_config.json"
     server_profile_template: "SPT-ESXi"
-    server_profile_name: "nathan-test-3"
-    os_deployment_plan: "ESXi-6.7_DP"
+    server_profile_name: "nathan-test-4"
+    os_deployment_plan: "HPE - Foundation 1.0 - create empty OS Volume-2017-10-13"
     ip_address: "10.188.0.115"
     dns1: "10.188.0.2"
     dns2: "10.188.0.3"
     gateway: "10.188.0.1"
     netmask: "255.255.255.0"
+    hostname: "test-node-1"
+    serverhardware: "MXQ71906M7, bay 6"
   tasks:
-#  - name: Add OS deployment plan to Server Profile Template
-#    oneview_server_profile_template:
-#      config: "{{ config }}"
-#      state: present
   - name: Create Server Profile from Server Profile Template
     oneview_server_profile:
       config: "{{ config }}"
       data:
         name: "{{ server_profile_name }}"
-        serverProfileTemplateName: "{{ server_profile_template }}"    
+        serverProfileTemplateName: "{{ server_profile_template }}"
+        serverHardwareName: "{{ serverhardware }}"
+        osDeploymentSettings:
+          osDeploymentPlanName: "{{ os_deployment_plan }}"
+          osCustomAttributes:
+            - name: VolumeSize
+              value: 10
+            - name: ManagementNIC.connectionid
+              value: 3
+            - name: ManagementNIC.networkuri
+              value: ""
+            - name: ManagementNIC.dhcp
+              value: false
       params: # Supported only in API version >= 600
         force: True
     delegate_to: localhost
