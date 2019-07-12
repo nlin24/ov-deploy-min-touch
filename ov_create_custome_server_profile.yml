@@ -5,15 +5,23 @@
     config: "oneview_config.json"
     server_profile_template: "SPT-ESXi"
     server_profile_name: "nathan-test-4"
-    os_deployment_plan: "HPE - Foundation 1.0 - create empty OS Volume-2017-10-13"
+    os_deployment_plan: "ESXi-6.7_DP"
     ip_address: "10.188.0.115"
     dns1: "10.188.0.2"
     dns2: "10.188.0.3"
     gateway: "10.188.0.1"
     netmask: "255.255.255.0"
     hostname: "test-node-1"
+    connectionid: 1
     serverhardware: "MXQ71906M7, bay 6"
+    password: "Password123"
   tasks:
+  - name: "Ensure the Server Profile is present with the OS Deployment Plan '{{ deployment_plan_name }}'"
+    oneview_network_set_facts:
+      config: '{{ config }}'
+      name: 'vcf-networkset'
+    delegate_to: localhost
+    register: network_sets
   - name: Create Server Profile from Server Profile Template
     oneview_server_profile:
       config: "{{ config }}"
@@ -24,14 +32,36 @@
         osDeploymentSettings:
           osDeploymentPlanName: "{{ os_deployment_plan }}"
           osCustomAttributes:
-            - name: VolumeSize
-              value: 10
+            - name: Hostname
+              value: "{{ hostname }}"
+            - name: DomainName
+              value: "synergy.local"
             - name: ManagementNIC.connectionid
-              value: 3
-            - name: ManagementNIC.networkuri
-              value: ""
+              value: "{{ connectionid }}"
+            - name: ManagementNIC.NetworkUri
+              value: "{{ network_sets['ansible_facts']['network_sets'][0]['networkUris'][connectionid] }}"
+            - name: SSH
+              value: enabled
+            - name: Password
+              value: "{{ password }}"
+            - name: ManagementNIC.dns1
+              value: "{{ dns1 }}"
+            - name: ManagementNIC.dns2
+              value: "{{ dns2 }}"
+            - name: ManagementNIC.gateway
+              value: "{{ gateway }}"
+            - name: ManagementNIC.ipaddress
+              value: "{{ ip_address}}"  
             - name: ManagementNIC.dhcp
               value: false
+            - name: ManagementNIC.netmask
+              value: "{{ netmask }}"
+            - name: ManagementNIC.constraint
+              value: userspecified
+            - name: ManagementNIC.ipv4disable
+              value: false
+            - name: ManagementNIC.vlanid
+              value: 0
       params: # Supported only in API version >= 600
         force: True
     delegate_to: localhost
