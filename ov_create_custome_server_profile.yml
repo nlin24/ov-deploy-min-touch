@@ -2,29 +2,44 @@
 - hosts: localhost
   gather_facts: no
   vars:
-    config: "oneview_config.json"
-    server_profile_template: "SPT-ESXi"
-    server_profile_name: "nathan-test-4"
-    os_deployment_plan: "ESXi-6.7_DP"
-    ip_address: "10.188.0.115"
-    dns1: "10.188.0.2"
-    dns2: "10.188.0.3"
-    gateway: "10.188.0.1"
+    server_profile_template: ""
+    server_profile_name: ""
+    os_deployment_plan: ""
+    ip_address: ""
+    domainName: ""
+    dns1: ""
+    dns2: ""
+    gateway: ""
     netmask: "255.255.255.0"
     hostname: "test-node-1"
     connectionid: 1
-    serverhardware: "MXQ71906M7, bay 6"
-    password: "Password123"
+    serverhardware: ""
+    esxi_password: "Password123"
+    vcenter_hostname: ""
+    vcenter_username: ""
+    vcenter_password: ""
   tasks:
-  - name: "Ensure the Server Profile is present with the OS Deployment Plan '{{ deployment_plan_name }}'"
+  - name: Read the environment variables
+    set_fact:
+      ov_hostname: "{{ lookup('env', 'ONEVIEWSDK_IP') }}"
+      ov_username: "{{ lookup('env', 'ONEVIEWSDK_USERNAME') }}"
+      ov_password: "{{ lookup('env', 'ONEVIEWSDK_PASSWORD') }}"
+      ov_api_version: "{{ lookup('env', 'ONEVIEWSDK_API_VERSION') }}"
+  - name: Get network URL from connection ID
     oneview_network_set_facts:
-      config: '{{ config }}'
+      hostname: "{{ ov_hostname }}"
+      username: "{{ ov_username }}"
+      password: "{{ ov_password }}"
+      api_version: "{{ ov_api_version}}"
       name: 'vcf-networkset'
     delegate_to: localhost
     register: network_sets
-  - name: Create Server Profile from Server Profile Template
+  - name: Create server from server profile template with OS deployment for ESXi
     oneview_server_profile:
-      config: "{{ config }}"
+      hostname: "{{ ov_hostname }}"
+      username: "{{ ov_username }}"
+      password: "{{ ov_password }}"
+      api_version: "{{ ov_api_version}}"
       data:
         name: "{{ server_profile_name }}"
         serverProfileTemplateName: "{{ server_profile_template }}"
@@ -35,7 +50,7 @@
             - name: Hostname
               value: "{{ hostname }}"
             - name: DomainName
-              value: "synergy.local"
+              value: "{{domainName}}"
             - name: ManagementNIC.connectionid
               value: "{{ connectionid }}"
             - name: ManagementNIC.NetworkUri
@@ -43,7 +58,7 @@
             - name: SSH
               value: enabled
             - name: Password
-              value: "{{ password }}"
+              value: "{{ esxi_password }}"
             - name: ManagementNIC.dns1
               value: "{{ dns1 }}"
             - name: ManagementNIC.dns2
@@ -65,4 +80,3 @@
       params: # Supported only in API version >= 600
         force: True
     delegate_to: localhost
-    register: result
