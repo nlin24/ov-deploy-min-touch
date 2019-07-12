@@ -1,3 +1,4 @@
 ansible
 hpICsp
 hpOneView==5.0.0b0
+PyVmomi
