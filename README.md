@@ -13,7 +13,7 @@ TBD
 It's recommended to spin up a Python virutal environment and install the Python package there, so the setup won't pollute the global space. The following commands creates and starts a *Python 2.7* virutal environment, named *ansible-env-python27*, with *virutalenv*:
 ```
 $ virtualenv --python=/usr/bin/python ansible-env-python27
-$ source project-env/bin/activate
+$ source ansible-env-python27/bin/activate
 ```
 Install Python packages listed in *requirements.txt*:
 ```
