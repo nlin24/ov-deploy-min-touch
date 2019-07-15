@@ -1,27 +1,31 @@
 ---
 - hosts: localhost
-  gather_facts: no
-  vars:
-    config: "oneview_config.json"
-    server_profile_template: "SPT-ESXi"
-    server_profile_name: "nathan-test-8"
-    os_deployment_plan: "ESXi-6.7_DP"
-    ip_address: "10.188.0.115"
-    domainName: "synergy.local"
-    dns1: "10.188.0.2"
-    dns2: "10.188.0.3"
-    gateway: "10.188.0.1"
-    netmask: "255.255.255.0"
-    hostname: "test-node-1"
-    connectionid: 1
-    serverhardware: "MXQ71906M7, bay 6"
-    esxi_password: "Password123"
-    vcenter_hostname: ""
-    vcenter_username: ""
-    vcenter_password: ""
   tasks:
-  - name: Read the environment variables
+  - name: Read from settings.csv
+    read_csv:
+      path: "settings.csv"
+      delimiter: ','
+      key: fieldName
+    register: settings
+  - name: Read variables from env and from settings.csv
     set_fact:
+      server_profile_template: "{{ settings.dict.server_profile_template.data }}"
+      server_profile_name: "{{ settings.dict.server_profile_name.data }}"
+      os_deployment_plan: "{{ settings.dict.os_deployment_plan.data }}"
+      ip_address: "{{ settings.dict.ip_address.data }}"
+      domainName: "{{ settings.dict.domainName.data }}"
+      dns1: "{{ settings.dict.dns1.data }}"
+      dns2: "{{ settings.dict.dns2.data }}"
+      gateway: "{{ settings.dict.gateway.data }}"
+      netmask: "{{ settings.dict.netmask.data }}"
+      esxi_hostname: "{{ settings.dict.hostname.data }}"
+      connectionid: "{{ settings.dict.connectionid.data | int }}"
+      serverhardware: "{{ settings.dict.serverhardware.data }}"
+      esxi_password: "{{ settings.dict.esxi_password.data }}"
+      vcenter_hostname: "{{ settings.dict.vcenter_hostname.data }}"
+      vcenter_username: "{{ settings.dict.vcenter_username.data }}"
+      vcenter_password: "{{ settings.dict.vcenter_password.data }}"
+      network_set_name: "{{ settings.dict.network_set_name.data }}"
       ov_hostname: "{{ lookup('env', 'ONEVIEWSDK_IP') }}"
       ov_username: "{{ lookup('env', 'ONEVIEWSDK_USERNAME') }}"
       ov_password: "{{ lookup('env', 'ONEVIEWSDK_PASSWORD') }}"
@@ -32,9 +36,9 @@
       username: "{{ ov_username }}"
       password: "{{ ov_password }}"
       api_version: "{{ ov_api_version}}"
-      name: 'vcf-networkset'
+      name: "{{ network_set_name }}"
     delegate_to: localhost
-    register: network_sets
+    register: network_info
   - name: Create server from server profile template with OS deployment for ESXi
     oneview_server_profile:
       hostname: "{{ ov_hostname }}"
@@ -49,13 +53,13 @@
           osDeploymentPlanName: "{{ os_deployment_plan }}"
           osCustomAttributes:
             - name: Hostname
-              value: "{{ hostname }}"
+              value: "{{ esxi_hostname }}"
             - name: DomainName
               value: "{{domainName}}"
             - name: ManagementNIC.connectionid
               value: "{{ connectionid }}"
             - name: ManagementNIC.NetworkUri
-              value: "{{ network_sets['ansible_facts']['network_sets'][0]['networkUris'][connectionid] }}"
+              value: "{{ network_info['ansible_facts']['network_sets'][0]['networkUris'][connectionid|int] }}"
             - name: SSH
               value: enabled
             - name: Password
