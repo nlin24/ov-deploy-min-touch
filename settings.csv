@@ -1,0 +1,17 @@
+fieldName,data
+server_profile_template,SPT-ESXi
+server_profile_name,nathan-test-2
+os_deployment_plan,ESXi-6.7_DP
+ip_address,10.188.0.115
+domainName,synergy.local
+dns1,10.188.0.2
+dns2,10.188.0.3
+gateway,10.188.0.1
+netmask,255.255.255.0
+hostname,test-node-1
+connectionid,"1"
+serverhardware,"MXQ71906M7, bay 6"
+esxi_password, "Password123"
+vcenter_hostname, ""
+vcenter_username, ""
+vcenter_password, ""
