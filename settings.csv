@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 fieldName,data
 server_profile_template,SPT-ESXi
 server_profile_name,nathan-test-2
@@ -16,3 +17,7 @@ vcenter_hostname, ""
 vcenter_username, ""
 vcenter_password, ""
 network_set_name,"vcf-networkset"
+=======
+serverName,server_profile_template,server_profile_name,os_deployment_plan,ip_address,domainName,dns1,dns2,gateway,netmask,hostname,connectionid,serverhardware,esxi_password,vcenter_hostname,vcenter_username,vcenter_password,network_set_name
+nathan11,"","","","","","","","","","","","","Password123","","","",""
+>>>>>>> master
