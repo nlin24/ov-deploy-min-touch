@@ -1,23 +1,2 @@
-<<<<<<< HEAD
-fieldName,data
-server_profile_template,SPT-ESXi
-server_profile_name,nathan-test-2
-os_deployment_plan,ESXi-6.7_DP
-ip_address,10.188.0.115
-domainName,synergy.local
-dns1,10.188.0.2
-dns2,10.188.0.3
-gateway,10.188.0.1
-netmask,255.255.255.0
-hostname,test-node-1
-connectionid,"1"
-serverhardware,"MXQ71906M7, bay 6"
-esxi_password, "Password123"
-vcenter_hostname, ""
-vcenter_username, ""
-vcenter_password, ""
-network_set_name,"vcf-networkset"
-=======
 serverName,server_profile_template,server_profile_name,os_deployment_plan,ip_address,domainName,dns1,dns2,gateway,netmask,hostname,connectionid,serverhardware,esxi_password,vcenter_hostname,vcenter_username,vcenter_password,network_set_name
-nathan11,"","","","","","","","","","","","","Password123","","","",""
->>>>>>> master
+nathan11,"SPT-ESXi","ESXi-6.7_DP","10.188.0.115","synergy.local","10.188.0.2","10.188.0.3","10.188.0.1","255.255.255.0","test-node-1","1","MXQ71906M7, bay 6","","Password123","","","","vcf-networkset"
