@@ -1,4 +1,4 @@
-ansible
-hpICsp
+ansible==2.8.2
+hpICsp==1.0.2
 hpOneView==5.0.0b0
-PyVmomi
+PyVmomi==6.7.1.2018.12
