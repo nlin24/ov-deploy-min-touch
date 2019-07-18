@@ -28,12 +28,12 @@ Set environment variables for OneView:
 (ansible-env-python27)$ export ONEVIEWSDK_PASSWORD='Password123'
 (ansible-env-python27)$ export ONEVIEWSDK_API_VERSION=800
 ```
-Modify the **data** fields in **settings.csv** to match to your target ESXi host, and to your target OneView environment. These pertain to setting up the  target server profile with a server profile template, a server hardware, and an OS deployment plan with custom attributes.
-> **_NOTE:_** ESXi host requires the *network_set_name*, *connectionid*, and *serverhardware*.
+Edit in the **settings.csv** to match to your target ESXi host, and to your target OneView environment. These pertain to creating server profiles in OneView using server profile templates, designated server hardwares, networkings, and OS deployment plans with custom attributes.
+> **_NOTE:_** An ESXi deployment plan requires specifying the *network_set_name*, *connectionid*, and *serverhardware* in its custom attributes. 
 
-When ready, run the *ov_create_custome_server_profile.yml* playbook. The -vvv flag enables the verbose mode.
+When ready, run *ov_ESXi_server_profile_loop.yml* playbook. The -vvv flag enables the verbose mode.
 ```
-(ansible-env-python27)$ ansible-playbook ov_create_custome_server_profile.yml -vvv
+(ansible-env-python27)$ ansible-playbook ov_ESXi_server_profile_loop.yml -vvv
 ```
 A successful run returns a *changed=1* in *PLAY RECAP*.
 ```
