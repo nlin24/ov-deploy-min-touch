@@ -8,9 +8,10 @@
   tasks:
   - name: Read from settings.csv
     read_csv:
-      path: "settings.csv"
-      delimiter: ','
+      path: settings.csv
+      delimiter: ","
     register: settings
+    delegate_to: localhost
   - name: Iterate through settings and create ESXi servers
     include: ov_ESXi_server_tasks.yml
     with_items: "{{ settings.list }}"
