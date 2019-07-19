@@ -8,7 +8,7 @@ TBD
 - [HPE OneView SDK for Python](https://github.com/HewlettPackard/python-hpOneView#installation)
 - [Anbile for OneView Setup](https://github.com/HewlettPackard/oneview-ansible#setup)
 
-> **_NOTE:_** According to the [Control Machine Requirements section](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#control-machine-requirements) in the Ansible documentation, Window is not supported for Ansible.
+> **_NOTE:_** According to the [Control Node Requirements](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#control-node-requirements) in the Ansible documentation, Window is not supported for Ansible.
 ## Environment Setup
 It's recommended to spin up a Python virutal environment and install the Python package there, so the setup won't pollute the global space. The following commands creates and starts a *Python 2.7* virutal environment, named *ansible-env-python27*, with *virutalenv*:
 ```
