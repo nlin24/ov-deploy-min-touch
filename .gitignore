@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ov-ansible-p27/
 __pycache__
 .pytest_cache
@@ -12,22 +11,8 @@ __pycache__
 test*.yml
 ov_create_custome_server_profile_2.yml
 ov_create_custome_server_profile_3.yml
- ov_create_custome_server_profile.yml-BACKUP
-=======
-ov-ansible-p27/
-__pycache__
-.pytest_cache
-*.json
-*.yaml
-*.txt
-!requirements.txt
-*.pyc
-!example.json
-*.retry
-test*.yml
-ov_create_custome_server_profile_2.yml
-ov_create_custome_server_profile_3.yml
+ov_create_custome_server_profile.yml-BACKUP
 *_BACKUP
 test.csv
 users.csv
->>>>>>> master
+settings.csv
