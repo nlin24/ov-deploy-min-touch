@@ -6,7 +6,7 @@ TBD
 - Python-pip package manager
 - virtualenv
 - [HPE OneView SDK for Python](https://github.com/HewlettPackard/python-hpOneView#installation)
-- [Anbile for OneView Setup](https://github.com/HewlettPackard/oneview-ansible#setup)
+- [Anbile for OneView](https://github.com/HewlettPackard/oneview-ansible#setup)
 
 > **_NOTE:_** According to the [Control Node Requirements](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#control-node-requirements) in the Ansible documentation, Window is not supported for Ansible.
 ## Environment Setup
@@ -31,7 +31,7 @@ Set environment variables for OneView:
 Edit in the **settings.csv** to match to your target ESXi host, and to your target OneView environment. These pertain to creating server profiles in OneView using server profile templates, designated server hardwares, networkings, and OS deployment plans with custom attributes.
 > **_NOTE:_** An ESXi deployment plan requires specifying the *network_set_name*, *connectionid*, and *serverhardware* in its custom attributes. 
 
-When ready, run *ov_ESXi_server_profile_loop.yml* playbook. The -vvv flag enables the verbose mode.
+When ready, run the *ov_ESXi_server_profile_loop.yml* playbook. The -vvv flag enables the verbose mode.
 ```
 (ansible-env-python27)$ ansible-playbook ov_ESXi_server_profile_loop.yml -vvv
 ```
