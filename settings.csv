@@ -1,3 +1,3 @@
-serverName,server_profile_template,os_deployment_plan,ip_address,domainName,dns1,dns2,gateway,netmask,esxi_hostname,connectionid,serverhardware,esxi_password,vcenter_hostname,vcenter_username,vcenter_password,network_set_name
-nathan13,SPT-ESXi,ESXi-6.7_DP,10.188.0.115,synergy.local,10.188.0.2,10.188.0.3,10.188.0.1,255.255.255.0,test-node-1,1,"MXQ71906M7, bay 6",Password123,,,,vcf-networkset
-nathan12,SPT-ESXi,ESXi-6.7_DP,10.188.0.117,synergy.local,10.188.0.2,10.188.0.3,10.188.0.1,255.255.255.0,test-node-2,1,"MXQ71906M7, bay 4",Password123,,,,vcf-networkset
+serverName,server_profile_template,os_deployment_plan,ip_address,esxi_password,domainName,dns1,dns2,gateway,netmask,index,vlanid,serverhardware,vcenter_hostname,vcenter_username,vcenter_password,datacenter_name,cluster_name,vcenter_switch_name,vmnic,network_set_name
+VMHESX101,GSE-SPT,ESxi 6.7-2,10.188.188.50,HP!nvent123,synergy.local,10.188.0.2,10.188.0.3,10.188.188.1,255.255.255.0,1,188,"MXQ71906VL, bay 1",10.188.29.15,Administrator@vsphere.local,HP!nvent123,GSE-Houston,GSE-Cluster,GSE-DSWITCH,vmnic1,GSE-NS
+VMHESX102,GSE-SPT,ESxi 6.7-2,10.188.188.51,HP!nvent123,synergy.local,10.188.0.2,10.188.0.3,10.188.188.1,255.255.255.0,1,188,"MXQ71906VL, bay 2",10.188.29.15,Administrator@vsphere.local,HP!nvent123,GSE-Houston,GSE-Cluster,GSE-DSWITCH,vmnic1,GSE-NS
