@@ -1,3 +1,1 @@
-serverName,server_profile_template,os_deployment_plan,ip_address,domainName,dns1,dns2,gateway,netmask,esxi_hostname,connectionid,serverhardware,esxi_password,vcenter_hostname,vcenter_username,vcenter_password,network_set_name
-,,,,,,,,,,,,,,,,vcf-networkset
-,,,,,,,,,,,,,,,,vcf-networkset
+serverName,server_profile_template,os_deployment_plan,ip_address,esxi_password,domainName,dns1,dns2,gateway,netmask,index,vlanid,serverhardware,vcenter_hostname,vcenter_username,vcenter_password,datacenter_name,cluster_name,vcenter_switch_name,vmnic,network_set_name

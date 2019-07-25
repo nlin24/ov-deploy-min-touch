@@ -1,5 +1,6 @@
 ---
 - hosts: localhost
+  any_errors_fatal: true
   vars:
     ov_hostname: "{{ lookup('env', 'ONEVIEWSDK_IP') }}"
     ov_username: "{{ lookup('env', 'ONEVIEWSDK_USERNAME') }}"
