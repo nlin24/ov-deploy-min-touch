@@ -1,0 +1,131 @@
+---
+- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    server_profile_template:
+    server_name:
+    os_deployment_plan: 
+    ip_address: 
+    domainName: 
+    dns1: 
+    dns2: 
+    gateway: 
+    netmask: 
+    connectionid: 1
+    serverhardware: 
+    esxi_password: 
+    vcenter_hostname: 
+    vcenter_username: 
+    vcenter_password: 
+    datacenter_name: 
+    network_set_name: 
+    cluster_name: 
+    vcenter_switch_name: 
+    index: 1
+    vlanid: 
+    vmnic: vmnic1
+    ov_hostname: "{{ lookup('env', 'ONEVIEWSDK_IP') }}"
+    ov_username: "{{ lookup('env', 'ONEVIEWSDK_USERNAME') }}"
+    ov_password: "{{ lookup('env', 'ONEVIEWSDK_PASSWORD') }}"
+    ov_api_version: "{{ lookup('env', 'ONEVIEWSDK_API_VERSION') }}"
+  tasks:
+  - name: Get network URL from connection ID
+    oneview_network_set_facts:
+      hostname: "{{ ov_hostname }}"
+      username: "{{ ov_username }}"
+      password: "{{ ov_password }}"
+      api_version: "{{ ov_api_version}}"
+      name: "{{ network_set_name }}"
+    delegate_to: localhost
+    register: network_info
+  - name: Create server from server profile template with OS deployment for ESXi
+    oneview_server_profile:
+      hostname: "{{ ov_hostname }}"
+      username: "{{ ov_username }}"
+      password: "{{ ov_password }}"
+      api_version: "{{ ov_api_version}}"
+      data:
+        name: "{{ server_name }}"
+        serverProfileTemplateName: "{{ server_profile_template }}"
+        serverHardwareName: "{{ serverhardware }}"
+        osDeploymentSettings:
+          osDeploymentPlanName: "{{ os_deployment_plan }}"
+          osCustomAttributes:
+            - name: Hostname
+              value: "{{ server_name }}"
+            - name: DomainName
+              value: "{{domainName}}"
+            - name: ManagementNIC.connectionid
+              value: "{{ connectionid }}"
+            - name: ManagementNIC.NetworkUri
+              value: "{{ network_info['ansible_facts']['network_sets'][0]['networkUris'][index|int] }}"
+            - name: SSH
+              value: enabled
+            - name: Password
+              value: "{{ esxi_password }}"
+            - name: ManagementNIC.dns1
+              value: "{{ dns1 }}"
+            - name: ManagementNIC.dns2
+              value: "{{ dns2 }}"
+            - name: ManagementNIC.gateway
+              value: "{{ gateway }}"
+            - name: ManagementNIC.ipaddress
+              value: "{{ ip_address}}"  
+            - name: ManagementNIC.dhcp
+              value: false
+            - name: ManagementNIC.netmask
+              value: "{{ netmask }}"
+            - name: ManagementNIC.constraint
+              value: userspecified
+            - name: ManagementNIC.ipv4disable
+              value: false
+            - name: ManagementNIC.vlanid
+              value: "{{ vlanid }}"
+      params: # Supported only in API version >= 600
+        force: True
+    delegate_to: localhost
+  - name: Power on the ESXi server
+    oneview_server_hardware:
+      hostname: "{{ ov_hostname }}"
+      username: "{{ ov_username }}"
+      password: "{{ ov_password }}"
+      api_version: "{{ ov_api_version}}"
+      state: power_state_set
+      data:
+        name : "{{ serverhardware }}"
+        powerStateData:
+          powerState: "On"
+          powerControl: "MomentaryPress"
+    delegate_to: localhost
+  - name: Wait for the ESXi host to respond
+    wait_for: 
+      delay: 120
+      sleep: 3
+      host: "{{ ip_address }}"
+      timeout: 360
+    delegate_to: localhost
+  - name: Add the ESXi host to vCenter
+    vmware_host:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      datacenter_name: "{{ datacenter_name }}"
+      cluster_name: "{{ cluster_name }}"
+      esxi_hostname: "{{ ip_address }}"
+      esxi_username: "root"
+      esxi_password: "{{ esxi_password }}"
+      state: present
+      validate_certs: False
+    delegate_to: localhost
+  - name: Add the ESXi host to VDS
+    vmware_dvs_host:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      esxi_hostname: "{{ ip_address }}"
+      switch_name: "{{ vcenter_switch_name }}"
+      vmnics:
+          - "{{ vmnic }}"
+      state: present
+      validate_certs: False
+    delegate_to: localhost
