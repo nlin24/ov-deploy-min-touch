@@ -24,10 +24,10 @@
     index: 1
     vlanid: 188
     vmnic: vmnic1
-    ov_hostname: "{{ lookup('env', 'ONEVIEWSDK_IP') }}"
-    ov_username: "{{ lookup('env', 'ONEVIEWSDK_USERNAME') }}"
-    ov_password: "{{ lookup('env', 'ONEVIEWSDK_PASSWORD') }}"
-    ov_api_version: "{{ lookup('env', 'ONEVIEWSDK_API_VERSION') }}"
+    ov_hostname: "10.188.29.20"
+    ov_username: "v188usradmin"
+    ov_password: "HP!nvent123"
+    ov_api_version: 800
   tasks:
   - name: Gather facts about all Server Profiles
     oneview_server_profile_facts:
