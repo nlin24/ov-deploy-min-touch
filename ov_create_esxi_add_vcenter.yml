@@ -2,32 +2,32 @@
 - hosts: localhost
   any_errors_fatal: true
   vars:
-    server_profile_template:
-    server_name:
-    os_deployment_plan: 
-    ip_address: 
-    domainName: 
-    dns1: 
-    dns2: 
-    gateway: 
-    netmask: 
+    server_profile_template: GSE-SPT
+    server_name: VMHESX101
+    os_deployment_plan: ESxi 6.7-2
+    ip_address: 10.188.188.50
+    domainName: synergy.local
+    dns1: 10.188.0.2
+    dns2: 10.188.0.3
+    gateway: 10.188.188.1
+    netmask: 255.255.255.0
     connectionid: 1
-    serverhardware: 
-    esxi_password: 
-    vcenter_hostname: 
-    vcenter_username: 
-    vcenter_password: 
-    datacenter_name: 
-    network_set_name: 
-    cluster_name: 
-    vcenter_switch_name: 
+    serverhardware: MXQ71906VL, bay 1
+    esxi_password: HP!nvent123
+    vcenter_hostname: 10.188.29.15
+    vcenter_username: Administrator@vsphere.local
+    vcenter_password: HP!nvent123
+    datacenter_name: GSE-Houston
+    network_set_name: GSE-NS
+    cluster_name: GSE-Cluster
+    vcenter_switch_name: GSE-DSWITCH
     index: 1
-    vlanid: 
+    vlanid: 188
     vmnic: vmnic1
-    ov_hostname: "{{ lookup('env', 'ONEVIEWSDK_IP') }}"
-    ov_username: "{{ lookup('env', 'ONEVIEWSDK_USERNAME') }}"
-    ov_password: "{{ lookup('env', 'ONEVIEWSDK_PASSWORD') }}"
-    ov_api_version: "{{ lookup('env', 'ONEVIEWSDK_API_VERSION') }}"
+    ov_hostname: "10.188.0.180"
+    ov_username: "v188usradmin"
+    ov_password: "HP!nvent123"
+    ov_api_version: 800
   tasks:
   - name: Get network URL from connection ID
     oneview_network_set_facts:
