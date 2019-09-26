@@ -22,10 +22,10 @@
     cluster_name: GSE-Cluster
     vcenter_switch_name: GSE-DSWITCH
     index: 1
-    vlanid: 188
+    vlanid: 247
     vmnic: vmnic1
-    ov_hostname: "10.188.0.180"
-    ov_username: "v188usradmin"
+    ov_hostname: "10.188.0.170"
+    ov_username: "v247usradmin"
     ov_password: "HP!nvent123"
     ov_api_version: 800
   tasks:
