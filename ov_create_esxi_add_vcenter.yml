@@ -12,7 +12,7 @@
     gateway: 10.188.247.1
     netmask: 255.255.255.0
     connectionid: 1
-    serverhardware: MXQ71906VL, bay 1
+    serverhardware: MXQ71906MB, bay 5
     esxi_password: HP!nvent123
     vcenter_hostname: 10.188.29.15
     vcenter_username: Administrator@vsphere.local
