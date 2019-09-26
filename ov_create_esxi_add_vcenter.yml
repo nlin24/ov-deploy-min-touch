@@ -21,7 +21,7 @@
     network_set_name: GSE-NS
     cluster_name: GSE-Cluster
     vcenter_switch_name: GSE-DSWITCH
-    index: 1
+    index: 0
     vlanid: 247
     vmnic: vmnic1
     ov_hostname: "10.188.0.170"
