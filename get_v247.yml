@@ -1,31 +1,15 @@
 ---
-- hosts: all
-  vars:
-    - config: "{{ playbook_dir }}/oneview_config.json"
-    - name: "SVT-240-temp"  # Set the name of an existent Ethernet Network to run this example
+- hosts: localhost
+  any_errors_fatal: true
   tasks:
-    - name: Gather facts about all Ethernet Networks
+    - name: Gather facts about an Ethernet Network V247
       oneview_ethernet_network_facts:
         config: "{{ config }}"
-      delegate_to: localhost
-
-    - debug: var=ethernet_networks
-
-    - name: Gather paginated, sorted and filtered facts about Ethernet Networks
-      oneview_ethernet_network_facts:
-        config: "{{ config }}"
-        params:
-          start: 0
-          count: 3
-          sort: 'name:descending'
-          filter: "purpose=General"
-
-    - debug: var=ethernet_networks
-
-    - name: Gather facts about an Ethernet Network by name
-      oneview_ethernet_network_facts:
-        config: "{{ config }}"
-        name: "{{ name }}"
+        name: V247
+        hostname: "{{ ov_hostname }}"
+        username: "{{ ov_username }}"
+        password: "{{ ov_password}}"
+        api_version: "{{ ov_api_version}}"
       delegate_to: localhost
 
     - debug: var=ethernet_networks
