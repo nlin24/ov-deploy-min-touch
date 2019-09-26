@@ -4,7 +4,6 @@
   tasks:
     - name: Gather facts about an Ethernet Network V247
       oneview_ethernet_network_facts:
-        config: "{{ config }}"
         name: V247
         hostname: "{{ ov_hostname }}"
         username: "{{ ov_username }}"
