@@ -30,7 +30,7 @@
     ov_api_version: 800
   tasks:
   - debug: msg="{{ov_api_version}}"
-  - name: Gather facts about all Server Profiles
+  - name: Gather facts about server profile by name
     oneview_server_profile_facts:
       hostname: "{{ ov_hostname }}"
       username: "{{ ov_username }}"
