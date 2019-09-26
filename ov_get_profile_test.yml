@@ -38,5 +38,4 @@
       api_version: "{{ ov_api_version}}"
     delegate_to: localhost
     register: server_profiles
-  - debug: msg="{{server_profiles | map(attribute='name') | list }}"
-  - debug: var=server_profiles
+  - debug: msg= "{{ server_profiles }}"
