@@ -1,33 +1,6 @@
 ---
 - hosts: localhost
   any_errors_fatal: true
-  vars:
-    server_profile_template: GSE-SPT
-    server_name: VMHESX101
-    os_deployment_plan: ESxi 6.7-2
-    ip_address: 10.188.247.23
-    domainName: synergy.local
-    dns1: 10.188.0.2
-    dns2: 10.188.0.3
-    gateway: 10.188.247.1
-    netmask: 255.255.255.0
-    connectionid: 1
-    serverhardware: MXQ71906MB, bay 5
-    esxi_password: HP!nvent123
-    vcenter_hostname: 10.188.29.15
-    vcenter_username: Administrator@vsphere.local
-    vcenter_password: HP!nvent123
-    datacenter_name: GSE-Houston
-    network_set_name: GSE-NS
-    cluster_name: GSE-Cluster
-    vcenter_switch_name: GSE-DSWITCH
-    index: 0
-    vlanid: 247
-    vmnic: vmnic1
-    ov_hostname: "10.188.0.170"
-    ov_username: "v247usradmin"
-    ov_password: "HP!nvent123"
-    ov_api_version: 800
   tasks:
   - name: Get network URL from connection ID
     oneview_network_set_facts:
