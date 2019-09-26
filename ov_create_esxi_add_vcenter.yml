@@ -10,6 +10,7 @@
       password: "{{ ov_password}}"
       api_version: "{{ ov_api_version}}"
     delegate_to: localhost
+    register: ethernet_networks
   - debug: var=ethernet_networks    
   - debug: var="{{ ethernet_networks['scopesUri'] }}"
   - name: Get network URL from connection ID
