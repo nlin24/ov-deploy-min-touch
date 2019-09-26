@@ -3,15 +3,15 @@
   any_errors_fatal: true
   tasks:
   - name: Gather facts about an Ethernet Network V247
-      oneview_ethernet_network_facts:
-        name: "{{ vlan_name }}"
-        hostname: "{{ ov_hostname }}"
-        username: "{{ ov_username }}"
-        password: "{{ ov_password}}"
-        api_version: "{{ ov_api_version}}"
-      delegate_to: localhost
-    - debug: var=ethernet_networks    
-    - debug: var="{{ ethernet_networks['scopesUri'] }}"
+    oneview_ethernet_network_facts:
+      name: "{{ vlan_name }}"
+      hostname: "{{ ov_hostname }}"
+      username: "{{ ov_username }}"
+      password: "{{ ov_password}}"
+      api_version: "{{ ov_api_version}}"
+    delegate_to: localhost
+  - debug: var=ethernet_networks    
+  - debug: var="{{ ethernet_networks['scopesUri'] }}"
   - name: Get network URL from connection ID
     oneview_network_set_facts:
       hostname: "{{ ov_hostname }}"
