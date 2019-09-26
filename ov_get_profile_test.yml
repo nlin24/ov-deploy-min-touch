@@ -36,6 +36,6 @@
       username: "{{ ov_username }}"
       password: "{{ ov_password }}"
       api_version: "{{ ov_api_version}}"
+      name: test
     delegate_to: localhost
-    register: server_profiles
-  - debug: msg= "{{ server_profiles }}"
+  - debug: var=server_profiles
