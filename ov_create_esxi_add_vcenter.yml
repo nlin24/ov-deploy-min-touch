@@ -41,7 +41,7 @@
             - name: ManagementNIC.connectionid
               value: "{{ connectionid }}"
             - name: ManagementNIC.NetworkUri
-              value: "{{ ethernet_networks['scopesUri'] }}"
+              value: "{{ ethernet_networks['ansible_facts']['ethernet_networks']['scopesUri'] }}"
             - name: SSH
               value: enabled
             - name: Password
