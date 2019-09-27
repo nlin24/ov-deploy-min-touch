@@ -90,7 +90,7 @@
   - name: Add the ESXi host to vCenter
     vmware_host:
       hostname: "{{ VMWARE_HOST }}"
-      username: "{{ VMWARE_USER }}"
+      username: "{{ VMWARE_USERNAME }}"
       password: "{{ VMWARE_PASSWORD }}"
       datacenter_name: "{{ datacenter_name }}"
       cluster_name: "{{ cluster_name }}"
@@ -103,7 +103,7 @@
   - name: Add the ESXi host to VDS
     vmware_dvs_host:
       hostname: "{{ VMWARE_HOST }}"
-      username: "{{ VMWARE_USER }}"
+      username: "{{ VMWARE_USERNAME }}"
       password: "{{ VMWARE_PASSWORD }}"
       esxi_hostname: "{{ ip_address }}"
       switch_name: "{{ vcenter_switch_name }}"
