@@ -102,9 +102,9 @@
     delegate_to: localhost
   - name: Add the ESXi host to VDS
     vmware_dvs_host:
-      hostname: "{{ vcenter_hostname }}"
-      username: "{{ vcenter_username }}"
-      password: "{{ vcenter_password }}"
+      hostname: "{{ VMWARE_HOST }}"
+      username: "{{ VMWARE_USER }}"
+      password: "{{ VM_PASSWORD }}"
       esxi_hostname: "{{ ip_address }}"
       switch_name: "{{ vcenter_switch_name }}"
       vmnics:
