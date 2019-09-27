@@ -6,8 +6,8 @@
       oneview_ethernet_network_facts:
         name: V247
         hostname: "{{ ov_hostname }}"
-        username: "{{ ov_username }}"
-        password: "{{ ov_password}}"
+        username: "{{ username }}"
+        password: "{{ password}}"
         api_version: "{{ ov_api_version}}"
       delegate_to: localhost
 
