@@ -89,9 +89,9 @@
     delegate_to: localhost
   - name: Add the ESXi host to vCenter
     vmware_host:
-      hostname: "{{ vcenter_hostname }}"
-      username: "{{ vcenter_username }}"
-      password: "{{ vcenter_password }}"
+      hostname: "{{ VMWARE_HOST }}"
+      username: "{{ VMWARE_USER }}"
+      password: "{{ VMWARE_PASSWORD }}"
       datacenter_name: "{{ datacenter_name }}"
       cluster_name: "{{ cluster_name }}"
       esxi_hostname: "{{ ip_address }}"
