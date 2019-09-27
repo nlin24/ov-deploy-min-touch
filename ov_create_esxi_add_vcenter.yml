@@ -104,7 +104,7 @@
     vmware_dvs_host:
       hostname: "{{ VMWARE_HOST }}"
       username: "{{ VMWARE_USER }}"
-      password: "{{ VM_PASSWORD }}"
+      password: "{{ VMWARE_PASSWORD }}"
       esxi_hostname: "{{ ip_address }}"
       switch_name: "{{ vcenter_switch_name }}"
       vmnics:
